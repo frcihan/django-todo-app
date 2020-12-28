@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form action="/create/" method="POST" style="margin: 20px; display: flex; justify-content: space-between;">
+    {% csrf_token %}
+    {{form.title}}
+    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 10px">Add</button>
+</form>
+
+{% if todos %}
+<table class="table" style="text-align: center; margin-top: 20px;">
+    <thead>
+        <tr class="alert alert-primary" style="font-size: 1.3rem;" >
+            <th scope="col">id</th>
+            <th scope="col">Todo Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for todo in todos %}
+        <tr
+        {% if todo.completed %}
+            class="alert alert-success"
+        {% else %}
+        class="alert alert-danger"
+        {% endif %}
+        >
+            <th scope="row">{{todo.id}}</th>
+            <td>{{todo.title}}</td>
+            {% if todo.completed %}
+            <td><a href="/{{todo.id}}/complete/" class="btn btn-success">Completed</a></td>
+            {% else %}
+            <td><a href="/{{todo.id}}/complete/" class="btn btn-info">Complete</a></td>
+            {% endif %}
+            <td><a href="/{{todo.id}}/update/" class="btn btn-warning">Update</a></td>
+            <td><a href="/{{todo.id}}/delete/" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else  %}
+    <div class="alert alert-success">
+        Nothing to do...
+    </div>
+{% endif %}
+    
+
+
+{% endblock content %}

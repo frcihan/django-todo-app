@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <form action="" method="POST" style="text-align: center;" class="alert alert-danger">
+        {% csrf_token %}
+        <p style="font-size: 1.2rem; font-weight: bold;" >Are you sure delete {{ todo }}?</p>
+        <button type="submit" class="btn btn-danger">Yes, I'm sure!</button>
+        <a href="{% url 'home' %}" class="btn btn-success">NO, Go Back!</a>
+    </form>
+
+{% endblock content %}

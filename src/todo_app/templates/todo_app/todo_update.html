@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}    
+
+<div class="alert alert-warning" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <form action="" method="POST" style="margin: 10px;">
+        {% csrf_token %}
+        Todo Title: {{form.title}}
+        Completed: {{form.completed}}
+        <button type="submit" class="btn btn-warning" style="margin-left: 10px">Update</button>
+    </form>
+    <a href="{% url 'todo-delete' todo.id %}"><button class="btn btn-danger">Delete</button></a>
+</div>
+
+
+{% endblock content %}
+    
